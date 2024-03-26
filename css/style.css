@@ -1,4 +1,4 @@
-/* --------------------- Fonts --------------------- */
+/* --------------------- fonts --------------------- */
 
 .quattrocento-sans-regular {
     font-family: "Quattrocento Sans", sans-serif;
@@ -24,7 +24,7 @@
     font-style: normal;
   }
   
-/* --------------------- Root settings --------------------- */
+/* --------------------- root settings --------------------- */
 
 *{
     margin: 0;
@@ -34,7 +34,34 @@
 li{list-style: none;}
 a{text-decoration: none; color: #f9f9f9;}
 
-/* --------------------- Global classes --------------------- */
+/* --------------------- global animations --------------------- */
+
+@keyframes rotate-close-icon-open {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+/* --------------------- global classes --------------------- */
+
+.shopping-bag{position: relative;}
+
+.shopping-bag .goods-count{
+    position: absolute;
+    padding: 0px 5px;
+    height: 14px;
+    width: 15px;
+    bottom: -6px;
+    right: -3px;
+    line-height: 16px;
+    font-size: 10px;
+    background-color: #b4bb6bee;
+    color: #f9f9f9;
+    border-radius: 50%;
+}
 
 .logo-close {
     position: absolute;
@@ -55,22 +82,31 @@ a{text-decoration: none; color: #f9f9f9;}
     cursor: pointer;
 }
 
-.close svg {transition: transform .5s ease; border-radius: 3px;}
-.close:hover svg {transform: rotate(180deg);}
+.close svg {transition: rotate .5s ease; border-radius: 3px;}
 
-/* --------------------- Media Queries --------------------- */
+.close:hover svg {rotate: 180deg !important;}
+
+/* --------------------- media queries --------------------- */
 
 @media screen and (max-width: 1450px) {
  
-    nav#wide-screen > .left-column > ul > .item {padding: 15px 0 15px 21px !important;}
+    nav#wide-screen > .left-column > ul.container > .item {padding: 15px 0 15px 21px !important;}
 
 }
 
 @media screen and (max-width: 1329px) {
  
-    nav#wide-screen > .left-column > ul {display: none;}
+    nav#wide-screen {padding: 16px 24px !important;}
+
+    nav#wide-screen > .left-column > ul.container {display: none;}
+
+    nav#wide-screen > .left-column > .shopping-bag{display: block !important;} 
+
+    nav#wide-screen > .right-column > .shopping-bag{display: none;} 
 
     nav#wide-screen > .left-column .hamburger-menu{display: block !important;}
+
+    nav#mobile-screen {transition: top .8s ease;}
 
 }
 
@@ -78,7 +114,7 @@ a{text-decoration: none; color: #f9f9f9;}
 
     nav#mobile-screen > .left-column {width: 60% !important; padding: 93px 1.5rem 0 !important;}
 
-    nav#mobile-screen > .left-column > ul > .item:first-child > .link{padding-top: 5px;}
+    nav#mobile-screen > .left-column > ul.container > .item:first-child > .link{padding-top: 5px;}
 
     nav#mobile-screen > .left-column .social-media{padding: 1.5rem 0 !important;}
 
@@ -90,22 +126,36 @@ a{text-decoration: none; color: #f9f9f9;}
 
 @media screen and (max-width: 768px) {
 
+    nav#wide-screen > .left-column {display: none !important;}
+    
+    nav#wide-screen > .center-column {width: 50% !important; justify-content: flex-start !important;}
+
+    nav#wide-screen > .right-column {width: 50% !important; gap: 16px !important;}
+
+    nav#wide-screen > .right-column .hamburger-menu{display: block !important;}
+
+    nav#wide-screen > .right-column .shopping-bag{display: block !important;}
+
+    nav#wide-screen > .right-column .contact-us{display: none !important;}
+    
+    nav#mobile-screen {display: block !important;}
+
     nav#mobile-screen > .left-column {
         width: 100% !important;
+        justify-content: flex-start !important;
         padding-left: 1.2rem !important;
     }
 
-    nav#mobile-screen > .left-column > ul > .item {font-size: 1.75rem !important;}
+    nav#mobile-screen > .left-column > ul.container{padding: calc(13vh - 40px) 0 0 !important;}
 
-    nav#mobile-screen > .left-column > ul > .item > .link{
+    nav#mobile-screen > .left-column > ul.container > .item {font-size: 1.75rem !important;}
+
+    nav#mobile-screen > .left-column > ul.container > .item > .link{
         width: 135px !important;
         padding: 13px 0 0px !important;
     }
 
     nav#mobile-screen > .left-column .sub-menu .sub-link:not(.sub-link-dropdown){padding: 8px 12px 8px !important;}
-
-    nav#mobile-screen > .left-column .social-media{padding: 1rem 0 !important;}
-
 
     nav#mobile-screen > .right-column {display: none !important;}
 
@@ -113,18 +163,14 @@ a{text-decoration: none; color: #f9f9f9;}
 
 @media screen and (max-width: 600px) {
 
-    nav#mobile-screen {height: 70vh !important;}
-
-    nav#mobile-screen > .left-column {height: 70vh !important; padding: 150px 1.2rem 0 !important;}
-
-    nav#mobile-screen > .left-column > ul > .item {font-size: 1.5rem !important;}
+    nav#mobile-screen > .left-column > ul.container > .item {font-size: 1.5rem !important;}
 
     nav#mobile-screen > .left-column .item > .link > svg {
         width: 20px !important;
         height: 20px !important;
     }    
 
-    nav#mobile-screen > .left-column > ul > .item > .link {width: 120px !important;}
+    nav#mobile-screen > .left-column > ul.container > .item > .link {width: 120px !important;}
 
 }
 
@@ -132,33 +178,34 @@ a{text-decoration: none; color: #f9f9f9;}
 
     .close-text {display: none;}
 
-    .logo-close {padding: 1rem 1rem !important;}
+    .logo-close {padding: 1rem 1rem 0 !important;}
 
     .logo-close .logo {width: 130px !important;}
 
     .logo-close .logo img{width: 100% !important;}
 
-    nav#mobile-screen > .left-column > ul > .item > .link {width: auto !important;}   
+    nav#wide-screen {padding: 16px 16px !important;}
+
+    nav#wide-screen .center-column .logo img{width: 100%;}
+
+    nav#mobile-screen > .left-column {padding-top: 65px !important;}
+
+    nav#mobile-screen > .left-column > ul.container > .item > .link {width: auto !important;}   
     
     nav#mobile-screen > .left-column .item > .link > svg {margin-left: 10px;}
 
-    nav#mobile-screen > .left-column .social-media {padding: 2rem 0 !important;}
-
 }
 
+/* --------------------- header settings --------------------- */
 
-
-
-/* --------------------- Nav settings --------------------- */
-
-body header{
+header{
     position: relative;
     height: 100vh;
-    background: url("../assets/images/coffee-beans-with-props-making-coffee-min.jpg") no-repeat; 
+    background: url("../assets/images/coffee-beans-with-props-making-coffee-min.jpg") no-repeat center; 
     background-size: cover;
 }
 
-body header::after{
+header::after{
     content: "";
     position: absolute;
     top: 0;
@@ -169,6 +216,25 @@ body header::after{
     z-index: 0;
 }
 
+/* --------------------- wide-screen global settings --------------------- */
+
+nav#wide-screen > .left-column > span, nav#wide-screen > .right-column > span{
+    display: flex;
+    cursor: pointer;
+    max-height: 24px;
+}
+
+nav#wide-screen svg{
+    width: 24px;
+    height: 24px;
+    fill: #d8d8d8;
+}
+
+nav#wide-screen svg path{stroke: #d8d8d8; stroke-width: 0px;}
+nav#wide-screen .shopping-bag path{stroke-width: 1px;}
+
+/* --------------------- wide-screen nav --------------------- */
+
 nav#wide-screen{
     padding: 30px 45px;
     display: flex;
@@ -177,14 +243,17 @@ nav#wide-screen{
     z-index: 1;
 }
 
+/* >>>>>>>>>>>>  left column <<<<<<<<<<<< */
+
 nav#wide-screen > .left-column{
     display: flex;
     width: 40%;
     justify-content: flex-start;
     align-items: center;
+    gap: 25px;
 }
 
-nav#wide-screen > .left-column > ul > .item{
+nav#wide-screen > .left-column > ul.container > .item{
     display: block;
     position: relative;
     font-size: .88rem;
@@ -203,7 +272,6 @@ nav#wide-screen > .left-column .link{
 }
 
 /* adding underline to the links */
-
 nav#wide-screen > .left-column .link::after, 
 nav#wide-screen > .left-column .sub-menu .sub-link .text::after, 
 nav#wide-screen > .left-column .child-menu .child-link .text::after {
@@ -218,6 +286,8 @@ nav#wide-screen > .left-column .child-menu .child-link .text::after {
     transition: width .2s ease;
 }
 
+/* >>>>>>>>>>>>  media query min-width 1330 <<<<<<<<<<<< */
+
 @media screen and (min-width: 1330px) {
  
     nav#wide-screen > .left-column .sub-menu .sub-link .text::after, 
@@ -230,7 +300,6 @@ nav#wide-screen > .left-column .child-menu .child-link .text::after {
     nav#wide-screen > .left-column .child-menu .child-link:hover:not(.active) .text::after {width: 100%;}
 
 }
-
 
 nav#wide-screen > .left-column .sub-menu .sub-link:hover:not(.active) svg{color: #fff;}
 
@@ -304,49 +373,74 @@ nav#wide-screen > .left-column .sub-menu .sub-link svg{margin-left: 20px;}
 .show-opacity-visible{opacity: 1 !important; visibility: visible !important;}
 .hide-opacity-visible{opacity: 0 !important; visibility: hidden !important;}
 
-/* hambergur icon */
+nav#wide-screen > .left-column > .hamburger-menu{display: none;}
 
-nav#wide-screen > .left-column .hamburger-menu{
-    display: none;
-    cursor: pointer;
+nav#wide-screen > .left-column > .shopping-bag{display: none;} 
+
+/* >>>>>>>>>>>>  center column <<<<<<<<<<<< */
+
+nav#wide-screen > .center-column{
+    display: flex;
+    width: 20%;
+    justify-content: center;
+    align-items: center;
 }
 
-/* mobile screen menu */
+nav#wide-screen > .center-column .logo{width: 186px;}
+
+/* >>>>>>>>>>>>  right column <<<<<<<<<<<< */
+
+nav#wide-screen > .right-column{
+    display: flex;
+    width: 40%;
+    justify-content: end;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+nav#wide-screen > .right-column .hamburger-menu{display: none;}
+
+
+/* --------------------- mobile screen nav --------------------- */
 
 nav#mobile-screen {
     position: absolute;
     display: flex;
     width: 100%;
-    min-height: 100vh;
-    top: 0;
+    height: 100vh;
+    top: -100vh;
     background-color: #222222;
     z-index: 1000;
+    overflow: hidden;
 }
+
+/* >>>>>>>>>>>>  left column <<<<<<<<<<<< */
 
 nav#mobile-screen > .left-column {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 0vh;
-    min-height: 100vh;
+    height: 100vh;
     width: 70%;
     padding-top: 113px;
     padding: 113px 1.5rem 0;
 }
 
-nav#mobile-screen > .left-column > ul {
+nav#mobile-screen > .left-column > ul.container {
     height: 50vh;
     padding: calc(16vh - 40px) 0 0;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     overflow-y: scroll;
+    animation-duration: 1.3s;
 }
 /* Chrome */
-nav#mobile-screen > .left-column > ul::-webkit-scrollbar {overflow: hidden;} 
+nav#mobile-screen > .left-column > ul.container::-webkit-scrollbar {overflow: hidden;} 
 
-nav#mobile-screen > .left-column > ul > .item {display: block; width: fit-content; font-size: 1.88rem;}
+nav#mobile-screen > .left-column > ul.container > .item {display: block; width: fit-content; font-size: 1.88rem;}
 
-nav#mobile-screen > .left-column > ul > .item > .link{
+nav#mobile-screen > .left-column > ul.container > .item > .link{
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
@@ -363,8 +457,8 @@ nav#mobile-screen > .left-column > ul > .item > .link{
 
 nav#mobile-screen > .left-column .item > .link > svg {width: 25px; height: 25px;}
 
-nav#mobile-screen > .left-column > ul > .item > .link:not(.default-active):hover{color: #f9f9f9; fill: #f9f9f9;}
-nav#mobile-screen > .left-column > ul > .item > .link.default-active, nav#mobile-screen > .left-column > ul > .item > .link.active-link{color: #f9f9f9; fill: #f9f9f9;}
+nav#mobile-screen > .left-column > ul.container > .item > .link:not(.default-active):hover{color: #f9f9f9; fill: #f9f9f9;}
+nav#mobile-screen > .left-column > ul.container > .item > .link.default-active, nav#mobile-screen > .left-column > ul.container > .item > .link.active-link{color: #f9f9f9; fill: #f9f9f9;}
 
 nav#mobile-screen > .left-column .sub-menu {
     display: none;
@@ -419,14 +513,12 @@ nav#mobile-screen > .left-column .sub-menu .child-menu .child-link{
     transition: all .3s ease;
 }
 
-
-/* Social Media */
-
 nav#mobile-screen > .left-column .social-media{
     display: flex;
     flex-wrap: wrap;
     border-top: 1px solid #474646;
     padding: 2rem 0;
+    animation-duration: 1.8s;
 }
 
 nav#mobile-screen > .left-column .social-media svg{
@@ -434,7 +526,7 @@ nav#mobile-screen > .left-column .social-media svg{
     height: fit-content;
 }
 
-nav#mobile-screen > .left-column .social-media .link{width: 2.4rem;}
+nav#mobile-screen > .left-column .social-media .link{width: 2.4rem; padding-bottom: .5rem;}
 
 nav#mobile-screen > .left-column .social-media .link path{transition: all .2s ease;}
 
@@ -446,6 +538,9 @@ nav#mobile-screen > .left-column .social-media a:hover .dribble svg{stroke: #d04
 nav#mobile-screen > .left-column .social-media .link:hover .instagram path,
 nav#mobile-screen > .left-column .social-media a:hover .instagram svg{stroke: #bd5dce ;fill: #bd5dce;}
 
+
+/* >>>>>>>>>>>>  right column <<<<<<<<<<<< */
+
 nav#mobile-screen > .right-column {
     display: flex;
     flex-direction: column;
@@ -455,7 +550,7 @@ nav#mobile-screen > .right-column {
     padding: 113px 3rem 0;
 }
 
-nav#mobile-screen > .right-column > .container{
+nav#mobile-screen > .right-column > .contact-us{
     height: 50vh;
     padding: calc(16vh - 40px) 0 0;
     overflow-y: scroll;
@@ -463,7 +558,7 @@ nav#mobile-screen > .right-column > .container{
     scrollbar-width: none;  /* Firefox */
 }
 /* Chrome */
-nav#mobile-screen > .right-column > .container::-webkit-scrollbar {overflow: hidden;} 
+nav#mobile-screen > .right-column > .contact-us::-webkit-scrollbar {overflow: hidden;} 
 
 nav#mobile-screen > .right-column .item{
     padding-top: 20px;
@@ -509,45 +604,3 @@ nav#mobile-screen > .right-column .item .link svg{
 }
 
 nav#mobile-screen > .right-column .item .link:not(.underlined):hover > svg{margin-left: 25px;}
-
-
-/* End of left column */
-
-
-
-
-nav#wide-screen .center-column{
-    display: flex;
-    width: 20%;
-    justify-content: center;
-    align-items: center;
-}
-
-nav#wide-screen .right-column{
-    display: flex;
-    width: 40%;
-    justify-content: end;
-    align-items: center;
-    column-gap: 25px;
-}
-
-nav#wide-screen .right-column span{display: flex; cursor: pointer;}
-
-nav#wide-screen .right-column svg{
-    width: 24px;
-    height: 24px;
-    fill: #fff;
-}
-
-nav#wide-screen .right-column .shopping-bag{position: relative;}
-
-nav#wide-screen .right-column .shopping-bag .goods-count{
-    position: absolute;
-    padding: 0px 6px;
-    bottom: -7px;
-    right: -5px;
-    font-size: 14px;
-    background-color: #b4bb6bee;
-    color: #f9f9f9;
-    border-radius: 50%;
-}
