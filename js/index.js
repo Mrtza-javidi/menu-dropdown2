@@ -212,17 +212,17 @@ $(document).ready(function() {
 
   closeIcon.click(function () {
 
-    logoCloseToggle(mobileNav, logoClose, "animate__fadeOutUp", closeSvg, "animate__rotateOut", undefined)();
+    logoCloseToggle(mobileNav, logoClose, "animate__fadeOutUp", closeSvg, "animate__rotateOut", ".1s")();
 
     mobileNavHamburgerToggle(mobileNav, undefined, mobileItemContainer, "animate__fadeOutLeft", mobileSocialMedia, "animate__fadeOutDown", mobileContactUs, "animate__fadeOutRight")(); 
     
     setTimeout(() => {
       $(mobileNav).css("top", "-100vh");
-    }, 500);
+    }, 300);
     
     setTimeout(() => {
       $(mobileNav).css("display", "none");
-    }, 1200);
+    }, 1000);
   
   });
 
