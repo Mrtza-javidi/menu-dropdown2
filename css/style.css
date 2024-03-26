@@ -69,7 +69,7 @@ a{text-decoration: none; color: #f9f9f9;}
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 3rem 1.5rem 0;
+    padding: 48px 24px 0;
     align-items: center;
 }
 
@@ -78,13 +78,35 @@ a{text-decoration: none; color: #f9f9f9;}
     align-items: center;
     gap: 10px;
     color: #96999f;
-    font: 1.1rem "Quattrocento Sans";
+    font: 1.1em "Quattrocento Sans";
     cursor: pointer;
 }
 
 .close svg {transition: rotate .5s ease; border-radius: 3px;}
 
 .close:hover svg {rotate: 180deg !important;}
+
+.search-bar{
+    position: absolute;
+    background-color: #F9F6EF;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 45vh;
+    font-size: 1rem;
+    z-index: 1000;
+}
+
+.white-space{
+    position: fixed;
+    display: none;
+    left: 0;
+    top:0;
+    height: 100vh;
+    width: 100%;
+    background: #f9f9f924;
+    z-index: 500;
+}
 
 /* --------------------- media queries --------------------- */
 
@@ -105,8 +127,6 @@ a{text-decoration: none; color: #f9f9f9;}
     nav#wide-screen > .right-column > .shopping-bag{display: none;} 
 
     nav#wide-screen > .left-column .hamburger-menu{display: block !important;}
-
-    nav#mobile-screen {transition: top .8s ease;}
 
 }
 
@@ -216,7 +236,7 @@ header::after{
     z-index: 0;
 }
 
-/* --------------------- wide-screen global settings --------------------- */
+/* --------------------- wide screen global settings --------------------- */
 
 nav#wide-screen > .left-column > span, nav#wide-screen > .right-column > span{
     display: flex;
@@ -401,16 +421,71 @@ nav#wide-screen > .right-column{
 
 nav#wide-screen > .right-column .hamburger-menu{display: none;}
 
+/* --------------------- search bar --------------------- */
+
+nav#wide-screen .search-bar{
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 48px 80px;
+}
+
+nav#wide-screen .search-bar svg{
+    width: 35px;
+    height: 35px;
+    fill: #2222229e;
+}
+
+nav#wide-screen .search-bar .logo-close{position: relative; padding: 0;}
+
+nav#wide-screen .search-bar form{
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 70%;
+    margin: auto;
+}
+
+nav#wide-screen .search-bar form::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    left: 0;
+    bottom: 0;
+    background-color: #c4c4c49e;
+}
+
+nav#wide-screen .search-bar input{
+    width: 100%;
+    height: 96px;
+    background-color: transparent;
+    font-size: 2.36em;
+    font-weight: 100;
+    padding-right: 50px;
+    color: #2222229e;
+    border: 0;
+    outline: 0;
+}
+
+nav#wide-screen .search-bar button{
+    background: transparent;
+    border: 0;
+    position: absolute;
+    right: 0;
+}
 
 /* --------------------- mobile screen nav --------------------- */
 
 nav#mobile-screen {
     position: absolute;
-    display: flex;
+    display: none;
     width: 100%;
     height: 100vh;
     top: -100vh;
     background-color: #222222;
+    transition: top .8s ease;
     z-index: 1000;
     overflow: hidden;
 }
