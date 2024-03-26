@@ -2,23 +2,23 @@ $(document).ready(function() {
 
   // wide screen nav settings
 
-  const wideNavDropdownItem = $('nav#wide-screen > .left-column .item');
+  const wideNavItem = $('nav#wide-screen > .left-column .item');
   const wideSubMenuSubLink = $("nav#wide-screen > .left-column .sub-link");
 
-  let wideCurrentDropdownItem = null;
-  let wideResetDropdownItemTimer1;
+  let wideCurrentItem = null;
+  let wideResetItemTimer1;
   let wideCurrentSubLink = null;
   let wideResetSubLinkTimer2;
         
   
 
   function attachHandler() {
-    $(wideNavDropdownItem).mouseenter(wideNavDropdownMouseEnter).mouseleave(wideNavDropdownMouseLeave);
+    $(wideNavItem).mouseenter(wideNavMouseEnter).mouseleave(wideNavMouseLeave);
     $(wideSubMenuSubLink).mouseenter(wideSubMenuSubLinkMouseEnter).mouseleave(wideSubMenuSubLinkMouseLeave);
   }
 
   function detachHandler() {
-    $(wideNavDropdownItem).off('mouseenter', wideNavDropdownMouseEnter).off('mouseleave', wideNavDropdownMouseLeave);
+    $(wideNavItem).off('mouseenter', wideNavMouseEnter).off('mouseleave', wideNavMouseLeave);
     $(wideSubMenuSubLink).off('mouseenter', wideSubMenuSubLinkMouseEnter).off('mouseleave', wideSubMenuSubLinkMouseLeave);
   }
 
@@ -36,21 +36,21 @@ $(document).ready(function() {
   checkWindowSize();
 
   // Define mouse event functions
-  function wideNavDropdownMouseEnter() {
+  function wideNavMouseEnter() {
     var navSubMenu = $(this).find('.sub-menu');
-    if (wideCurrentDropdownItem) {
-      clearTimeout(wideResetDropdownItemTimer1);
-      wideCurrentDropdownItem.find('.sub-menu').removeClass('show-opacity-visible').addClass('hide-opacity-visible');
+    if (wideCurrentItem) {
+      clearTimeout(wideResetItemTimer1);
+      wideCurrentItem.find('.sub-menu').removeClass('show-opacity-visible').addClass('hide-opacity-visible');
     }
     navSubMenu.removeClass('hide-opacity-visible').addClass('show-opacity-visible');
-    wideCurrentDropdownItem = $(this);
+    wideCurrentItem = $(this);
   }
 
-  function wideNavDropdownMouseLeave() {
-    wideResetDropdownItemTimer1 = setTimeout(() => {
-      if (wideCurrentDropdownItem && !wideCurrentDropdownItem.is(':hover')) {
-        wideCurrentDropdownItem.find('.sub-menu').removeClass('show-opacity-visible').addClass('hide-opacity-visible');
-        wideCurrentDropdownItem = null;
+  function wideNavMouseLeave() {
+    wideResetItemTimer1 = setTimeout(() => {
+      if (wideCurrentItem && !wideCurrentItem.is(':hover')) {
+        wideCurrentItem.find('.sub-menu').removeClass('show-opacity-visible').addClass('hide-opacity-visible');
+        wideCurrentItem = null;
       }
     }, 400);
   }
@@ -80,82 +80,126 @@ $(document).ready(function() {
  
   // mobile screen nav settings
 
-const mobileNavDropdownLink = $('nav#mobile-screen > .left-column .item > .link');
-const mobileSubMenu = $("nav#mobile-screen > .left-column .sub-menu");
-const mobileChildMenu = $("nav#mobile-screen > .left-column .sub-link > .child-menu");
-const mobileSubLinkText = $('nav#mobile-screen > .left-column .sub-link > .text');
+  const mobileNavLink = $('nav#mobile-screen > .left-column .item > .link');
+  const mobileSubMenu = $("nav#mobile-screen > .left-column .sub-menu");
+  const mobileChildMenu = $("nav#mobile-screen > .left-column .sub-link > .child-menu");
+  const mobileSubLinkText = $('nav#mobile-screen > .left-column .sub-link > .text');
 
-let mobileCurrentSubMenu = null;
-let mobileCurrentchildMenu = null;
-let mobileCurrentLinkTextDownChevron = null;
+  let mobileCurrentSubMenu = null;
+  let mobileCurrentchildMenu = null;
+  let mobileCurrentLinkTextDownChevron = null;
 
-// Check dropdownItemLink click 
+  // Check dropdownItemLink click 
 
-mobileNavDropdownLink.click(function () {
-  const subMenu = $(this).parent().find(mobileSubMenu);
-  // Toggle active class for color change
-  $(this).toggleClass('active-link', subMenu.is(':hidden'));
+  mobileNavLink.click(function () {
+    const subMenu = $(this).parent().find(mobileSubMenu);
+    // Toggle active class for color change
+    $(this).toggleClass('active-link', subMenu.is(':hidden'));
 
-  // Remove active class from all links and then add to the clicked one if it's being opened
-  mobileNavDropdownLink.removeClass('active-link');
-  mobileSubLinkText.removeClass('active-link'); // Reset sublink text color
-  if (subMenu.is(':hidden')) {
-    $(this).addClass('active-link');
-  }  
+    // Remove active class from all links and then add to the clicked one if it's being opened
+    mobileNavLink.removeClass('active-link');
+    mobileSubLinkText.removeClass('active-link'); // Reset sublink text color
+    if (subMenu.is(':hidden')) {
+      $(this).addClass('active-link');
+    }  
 
-  if (mobileCurrentSubMenu && mobileCurrentSubMenu[0] !== subMenu[0]) {
-    mobileCurrentSubMenu.slideUp();
-  }
-
-  // Close all child menus and reset their chevrons when any item link is clicked
-  if (mobileCurrentchildMenu) {
-    mobileCurrentchildMenu.slideUp();
-    $('nav#mobile-screen > .left-column .sub-link .text > svg').css("transform", "");
-    mobileCurrentchildMenu = null;
-    mobileCurrentLinkTextDownChevron = null;
-  }
-
-  subMenu.slideToggle();
-  mobileCurrentSubMenu = subMenu.is(':visible') ? subMenu : null;
-});
-
-// Check mobileSubLinkText click 
-
-mobileSubLinkText.click(function () {
-  const childMenu = $(this).parent().find(mobileChildMenu);
-  const downChevron = $(this).find("svg");
-
-// Remove active class from all sublinks and then add to the clicked one if it's being opened
-  mobileSubLinkText.removeClass('active-link');
-  if (childMenu.is(':hidden')) {
-    $(this).addClass('active-link');
-  }
-
-  // Close the previously opened childMenu and reset its chevron
-  if (mobileCurrentchildMenu && mobileCurrentchildMenu[0] !== childMenu[0]) {
-
-    mobileCurrentchildMenu.slideUp();
-
-    if (mobileCurrentLinkTextDownChevron) {
-      mobileCurrentLinkTextDownChevron.css("transform", "");
+    if (mobileCurrentSubMenu && mobileCurrentSubMenu[0] !== subMenu[0]) {
+      mobileCurrentSubMenu.slideUp();
     }
 
-  }
+    // Close all child menus and reset their chevrons when any item link is clicked
+    if (mobileCurrentchildMenu) {
+      mobileCurrentchildMenu.slideUp();
+      $('nav#mobile-screen > .left-column .sub-link .text > svg').css("transform", "");
+      mobileCurrentchildMenu = null;
+      mobileCurrentLinkTextDownChevron = null;
+    }
 
-  // Toggle the clicked childMenu and rotate its chevron
-  childMenu.slideToggle(function() {
-    // After the toggle action completes, check visibility to set the chevron
-    const isChildMenuVisible = $(this).is(':visible');
-    downChevron.css("transform", isChildMenuVisible ? "rotate(180deg)" : "rotate(0deg)");
+    subMenu.slideToggle();
+    mobileCurrentSubMenu = subMenu.is(':visible') ? subMenu : null;
   });
 
-  // Update the current childMenu and chevron references
-  mobileCurrentchildMenu = childMenu;
-  mobileCurrentLinkTextDownChevron = downChevron;
-});
+  // Check mobileSubLinkText click 
+
+  mobileSubLinkText.click(function () {
+    const childMenu = $(this).parent().find(mobileChildMenu);
+    const downChevron = $(this).find("svg");
+
+  // Remove active class from all sublinks and then add to the clicked one if it's being opened
+    mobileSubLinkText.removeClass('active-link');
+    if (childMenu.is(':hidden')) {
+      $(this).addClass('active-link');
+    }
+
+    // Close the previously opened childMenu and reset its chevron
+    if (mobileCurrentchildMenu && mobileCurrentchildMenu[0] !== childMenu[0]) {
+
+      mobileCurrentchildMenu.slideUp();
+
+      if (mobileCurrentLinkTextDownChevron) {
+        mobileCurrentLinkTextDownChevron.css("transform", "");
+      }
+
+    }
+
+    // Toggle the clicked childMenu and rotate its chevron
+    childMenu.slideToggle(function() {
+      // After the toggle action completes, check visibility to set the chevron
+      const isChildMenuVisible = $(this).is(':visible');
+      downChevron.css("transform", isChildMenuVisible ? "rotate(180deg)" : "rotate(0deg)");
+    });
+
+    // Update the current childMenu and chevron references
+    mobileCurrentchildMenu = childMenu;
+    mobileCurrentLinkTextDownChevron = downChevron;
+  });
 
 
+  // Global hamburger and close variables
 
+  const mobileNav = $('nav#mobile-screen');
+  const mobileItemContainer = $('nav#mobile-screen > .left-column > .container');
+  const mobileSocialMedia = $('nav#mobile-screen > .left-column > .social-media');
+  const mobileContactUs = $('nav#mobile-screen > .right-column > .contact-us');
+  const hamburgerIcon = $("nav#wide-screen > .left-column > .hamburger-menu svg");
+  const logoClose = $('.logo-close');
+  const closeIcon = $(".close");
+  const closeSvg = $(".logo-close .close svg");
+
+  // Hamburger open settings
+
+  hamburgerIcon.click(function () {
+
+    $(mobileNav).find("*").removeClass("animate__fadeInDown animate__rotateIn animate__fadeInLeft animate__fadeInUp animate__fadeInRight animate__fadeOutUp animate__rotateOut animate__fadeOutLeft animate__fadeOutDown animate__fadeOutRight");
+    
+    openClose(mobileNav, "0", logoClose, "animate__fadeInDown", closeSvg, "animate__rotateIn", ".2s", mobileItemContainer, "animate__fadeInLeft", mobileSocialMedia, "animate__fadeInUp", mobileContactUs, "animate__fadeInRight")();
+  
+  });
+
+
+  // openClose icon settings 
+
+  function openClose(element, topValue, logoClose, animataionName1, closeSvg, animataionName2, animationDelayAll, mobileItemContainer, animataionName3, mobileSocialMedia, animataionName4, mobileContactUs, animataionName5) {
+    return function() {
+      $(element).css("top", topValue);
+      $(element).find("*").css("animation-delay", animationDelayAll);
+      $(element).find(logoClose).addClass(animataionName1);
+      $(element).find(logoClose).find(closeSvg).addClass(animataionName2);
+      $(element).find(".left-column").find(mobileItemContainer).addClass(animataionName3);
+      $(element).find(".left-column").find(mobileSocialMedia).addClass(animataionName4);
+      $(element).find(".right-column").find(mobileContactUs).addClass(animataionName5);
+    };
+  }
+
+  closeIcon.click(function () {
+
+    openClose(mobileNav, undefined, logoClose, "animate__fadeOutUp", closeSvg, "animate__rotateOut", undefined, mobileItemContainer, "animate__fadeOutLeft", mobileSocialMedia, "animate__fadeOutDown", mobileContactUs, "animate__fadeOutRight")(); 
+    
+    setTimeout(() => {
+      $(mobileNav).css("top", "-100vh");
+    }, 500);
+  
+  });
 
   
 });
