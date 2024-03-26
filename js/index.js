@@ -177,7 +177,7 @@ $(document).ready(function() {
 
   /* --------------------- mobile screen nav end --------------------- */
 
-  /* --------------------- hamburger and close start --------------------- */
+  /* --------------------- hamburger start --------------------- */
 
   /* >>>>>>>>>>>> global variables <<<<<<<<<<<< */
 
@@ -195,8 +195,16 @@ $(document).ready(function() {
   hamburgerIcon.click(function () {
 
     $(mobileNav).find("*").removeClass("animate__fadeInDown animate__rotateIn animate__fadeInLeft animate__fadeInUp animate__fadeInRight animate__fadeOutUp animate__rotateOut animate__fadeOutLeft animate__fadeOutDown animate__fadeOutRight");
+
+    $(mobileNav).css("display", "flex");
+
+    setTimeout(() => {
+
+      logoCloseToggle(mobileNav, logoClose, "animate__fadeInDown", closeSvg, "animate__rotateIn", ".3s")();
     
-    openClose(mobileNav, "0", logoClose, "animate__fadeInDown", closeSvg, "animate__rotateIn", ".2s", mobileItemContainer, "animate__fadeInLeft", mobileSocialMedia, "animate__fadeInUp", mobileContactUs, "animate__fadeInRight")();
+      mobileNavHamburgerToggle(mobileNav, "0", mobileItemContainer, "animate__fadeInLeft", mobileSocialMedia, "animate__fadeInUp", mobileContactUs, "animate__fadeInRight")();
+
+    }, 1);
   
   });
   
@@ -204,30 +212,46 @@ $(document).ready(function() {
 
   closeIcon.click(function () {
 
-    openClose(mobileNav, undefined, logoClose, "animate__fadeOutUp", closeSvg, "animate__rotateOut", undefined, mobileItemContainer, "animate__fadeOutLeft", mobileSocialMedia, "animate__fadeOutDown", mobileContactUs, "animate__fadeOutRight")(); 
+    logoCloseToggle(mobileNav, logoClose, "animate__fadeOutUp", closeSvg, "animate__rotateOut", undefined)();
+
+    mobileNavHamburgerToggle(mobileNav, undefined, mobileItemContainer, "animate__fadeOutLeft", mobileSocialMedia, "animate__fadeOutDown", mobileContactUs, "animate__fadeOutRight")(); 
     
     setTimeout(() => {
       $(mobileNav).css("top", "-100vh");
     }, 500);
+    
+    setTimeout(() => {
+      $(mobileNav).css("display", "none");
+    }, 1200);
   
   });
 
 
-  /* --------------------->>>>>>>>>>>> open close function for mobile nav, serach bar, etc. <<<<<<<<<<<<--------------------- */
+  /* >>>>>>>>>>>> open and close function for mobile nav <<<<<<<<<<<< */
 
-  function openClose(element, topValue, logoClose, animataionName1, closeSvg, animataionName2, animationDelayAll, mobileItemContainer, animataionName3, mobileSocialMedia, animataionName4, mobileContactUs, animataionName5) {
+  function mobileNavHamburgerToggle(element, topValue, mobileItemContainer, animataionName3, mobileSocialMedia, animataionName4, mobileContactUs, animataionName5) {
     return function() {
       $(element).css("top", topValue);
-      $(element).find("*").css("animation-delay", animationDelayAll);
-      $(element).find(logoClose).addClass(animataionName1);
-      $(element).find(logoClose).find(closeSvg).addClass(animataionName2);
       $(element).find(".left-column").find(mobileItemContainer).addClass(animataionName3);
       $(element).find(".left-column").find(mobileSocialMedia).addClass(animataionName4);
       $(element).find(".right-column").find(mobileContactUs).addClass(animataionName5);
     };
   }
 
-  /* --------------------- hamburger and close end --------------------- */
+  /* --------------------- hamburger end --------------------- */
+
+  /* --------------------- open and close function for logo close start --------------------- */
+
+  function logoCloseToggle(element, logoClose, animataionName1, closeSvg, animataionName2, animationDelayAll) {
+    return function() {
+      $(element).find("*").css("animation-delay", animationDelayAll);
+      $(element).find(logoClose).addClass(animataionName1);
+      $(element).find(logoClose).find(closeSvg).addClass(animataionName2);
+    };
+  }
+
+  /* --------------------- open and close function for logo close end --------------------- */
+
 
   
 });
