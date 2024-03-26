@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
-  // wide screen nav settings
+  /* --------------------- wide screen nav start --------------------- */
+
+  /* >>>>>>>>>>>> global variables <<<<<<<<<<<< */
 
   const wideNavItem = $('nav#wide-screen > .left-column .item');
   const wideSubMenuSubLink = $("nav#wide-screen > .left-column .sub-link");
@@ -9,34 +11,40 @@ $(document).ready(function() {
   let wideResetItemTimer1;
   let wideCurrentSubLink = null;
   let wideResetSubLinkTimer2;
-        
   
+  /* >>>>>>>>>>>> nav appear or disappear <<<<<<<<<<<< */
 
-  function attachHandler() {
-    $(wideNavItem).mouseenter(wideNavMouseEnter).mouseleave(wideNavMouseLeave);
-    $(wideSubMenuSubLink).mouseenter(wideSubMenuSubLinkMouseEnter).mouseleave(wideSubMenuSubLinkMouseLeave);
+  function navAppears() {
+    $(wideNavItem).mouseenter(wideNavItemMouseEnter).mouseleave(wideNavItemMouseLeave);
+    $(wideSubMenuSubLink).mouseenter(wideNavSubLinkMouseEnter).mouseleave(wideNavSubLinkMouseLeave);
   }
 
-  function detachHandler() {
-    $(wideNavItem).off('mouseenter', wideNavMouseEnter).off('mouseleave', wideNavMouseLeave);
-    $(wideSubMenuSubLink).off('mouseenter', wideSubMenuSubLinkMouseEnter).off('mouseleave', wideSubMenuSubLinkMouseLeave);
+  function navDisappears() {
+    $(wideNavItem).off('mouseenter', wideNavItemMouseEnter).off('mouseleave', wideNavItemMouseLeave);
+    $(wideSubMenuSubLink).off('mouseenter', wideNavSubLinkMouseEnter).off('mouseleave', wideNavSubLinkMouseLeave);
   }
 
   function checkWindowSize() {
     var windowWidth = $(window).width();
 
     if (windowWidth >= 1330) {
-      attachHandler();
+      navAppears();
     } else {
-      detachHandler();
+      navDisappears();
     }
   }
 
+  // check the current window width 
   $(window).resize(checkWindowSize);
+  // check the first load window width 
   checkWindowSize();
 
-  // Define mouse event functions
-  function wideNavMouseEnter() {
+
+  /* >>>>>>>>>>>> define mouse events  <<<<<<<<<<<< */
+  
+  // item mouse enter
+  
+  function wideNavItemMouseEnter() {
     var navSubMenu = $(this).find('.sub-menu');
     if (wideCurrentItem) {
       clearTimeout(wideResetItemTimer1);
@@ -46,7 +54,9 @@ $(document).ready(function() {
     wideCurrentItem = $(this);
   }
 
-  function wideNavMouseLeave() {
+  // item mouse leave
+  
+  function wideNavItemMouseLeave() {
     wideResetItemTimer1 = setTimeout(() => {
       if (wideCurrentItem && !wideCurrentItem.is(':hover')) {
         wideCurrentItem.find('.sub-menu').removeClass('show-opacity-visible').addClass('hide-opacity-visible');
@@ -55,7 +65,9 @@ $(document).ready(function() {
     }, 400);
   }
 
-  function wideSubMenuSubLinkMouseEnter() {
+  // sub menu sub link mouse enter
+
+  function wideNavSubLinkMouseEnter() {
     var childMenu = $(this).find('.child-menu');
     if (wideCurrentSubLink) {
       clearTimeout(wideResetSubLinkTimer2);
@@ -65,7 +77,9 @@ $(document).ready(function() {
     wideCurrentSubLink = $(this);
   }
 
-  function wideSubMenuSubLinkMouseLeave() {
+  // sub menu sub link mouse leave
+
+  function wideNavSubLinkMouseLeave() {
     wideResetSubLinkTimer2 = setTimeout(() => {
       if (wideCurrentSubLink && !wideCurrentSubLink.is(':hover')) {
         wideCurrentSubLink.find('.child-menu').removeClass('show-opacity-visible').addClass('hide-opacity-visible');
@@ -75,10 +89,11 @@ $(document).ready(function() {
     }, 300);
   }
 
+  /* --------------------- wide screen nav end --------------------- */
 
+  /* --------------------- mobile screen nav start --------------------- */
 
- 
-  // mobile screen nav settings
+  /* >>>>>>>>>>>> global variables <<<<<<<<<<<< */
 
   const mobileNavLink = $('nav#mobile-screen > .left-column .item > .link');
   const mobileSubMenu = $("nav#mobile-screen > .left-column .sub-menu");
@@ -89,12 +104,14 @@ $(document).ready(function() {
   let mobileCurrentchildMenu = null;
   let mobileCurrentLinkTextDownChevron = null;
 
-  // Check dropdownItemLink click 
+  /* >>>>>>>>>>>> link click <<<<<<<<<<<< */
 
   mobileNavLink.click(function () {
+  
     const subMenu = $(this).parent().find(mobileSubMenu);
+  
     // Toggle active class for color change
-    $(this).toggleClass('active-link', subMenu.is(':hidden'));
+    $(this).toggleClass('active-link', subMenu.is(':hidden')); // if the second argument is true add the class mentioned, otherwise remove it from the element
 
     // Remove active class from all links and then add to the clicked one if it's being opened
     mobileNavLink.removeClass('active-link');
@@ -109,27 +126,31 @@ $(document).ready(function() {
 
     // Close all child menus and reset their chevrons when any item link is clicked
     if (mobileCurrentchildMenu) {
+
       mobileCurrentchildMenu.slideUp();
+      
       $('nav#mobile-screen > .left-column .sub-link .text > svg').css("transform", "");
       mobileCurrentchildMenu = null;
       mobileCurrentLinkTextDownChevron = null;
+    
     }
 
     subMenu.slideToggle();
     mobileCurrentSubMenu = subMenu.is(':visible') ? subMenu : null;
   });
 
-  // Check mobileSubLinkText click 
+
+  /* >>>>>>>>>>>> sub link text click <<<<<<<<<<<< */
 
   mobileSubLinkText.click(function () {
+
     const childMenu = $(this).parent().find(mobileChildMenu);
     const downChevron = $(this).find("svg");
 
-  // Remove active class from all sublinks and then add to the clicked one if it's being opened
+    // Remove active class from all sublinks and then add to the clicked one if it's being opened
     mobileSubLinkText.removeClass('active-link');
-    if (childMenu.is(':hidden')) {
-      $(this).addClass('active-link');
-    }
+
+    $(this).toggleClass('active-link', childMenu.is(':hidden'));
 
     // Close the previously opened childMenu and reset its chevron
     if (mobileCurrentchildMenu && mobileCurrentchildMenu[0] !== childMenu[0]) {
@@ -154,19 +175,22 @@ $(document).ready(function() {
     mobileCurrentLinkTextDownChevron = downChevron;
   });
 
+  /* --------------------- mobile screen nav end --------------------- */
 
-  // Global hamburger and close variables
+  /* --------------------- hamburger and close start --------------------- */
+
+  /* >>>>>>>>>>>> global variables <<<<<<<<<<<< */
 
   const mobileNav = $('nav#mobile-screen');
   const mobileItemContainer = $('nav#mobile-screen > .left-column > .container');
   const mobileSocialMedia = $('nav#mobile-screen > .left-column > .social-media');
   const mobileContactUs = $('nav#mobile-screen > .right-column > .contact-us');
-  const hamburgerIcon = $("nav#wide-screen > .left-column > .hamburger-menu svg");
+  const hamburgerIcon = $("nav#wide-screen .hamburger-menu svg");
   const logoClose = $('.logo-close');
   const closeIcon = $(".close");
   const closeSvg = $(".logo-close .close svg");
 
-  // Hamburger open settings
+  /* >>>>>>>>>>>> hamburger open click <<<<<<<<<<<< */
 
   hamburgerIcon.click(function () {
 
@@ -175,9 +199,21 @@ $(document).ready(function() {
     openClose(mobileNav, "0", logoClose, "animate__fadeInDown", closeSvg, "animate__rotateIn", ".2s", mobileItemContainer, "animate__fadeInLeft", mobileSocialMedia, "animate__fadeInUp", mobileContactUs, "animate__fadeInRight")();
   
   });
+  
+  /* >>>>>>>>>>>> hamburger close click <<<<<<<<<<<< */
+
+  closeIcon.click(function () {
+
+    openClose(mobileNav, undefined, logoClose, "animate__fadeOutUp", closeSvg, "animate__rotateOut", undefined, mobileItemContainer, "animate__fadeOutLeft", mobileSocialMedia, "animate__fadeOutDown", mobileContactUs, "animate__fadeOutRight")(); 
+    
+    setTimeout(() => {
+      $(mobileNav).css("top", "-100vh");
+    }, 500);
+  
+  });
 
 
-  // openClose icon settings 
+  /* --------------------->>>>>>>>>>>> open close function for mobile nav, serach bar, etc. <<<<<<<<<<<<--------------------- */
 
   function openClose(element, topValue, logoClose, animataionName1, closeSvg, animataionName2, animationDelayAll, mobileItemContainer, animataionName3, mobileSocialMedia, animataionName4, mobileContactUs, animataionName5) {
     return function() {
@@ -191,15 +227,7 @@ $(document).ready(function() {
     };
   }
 
-  closeIcon.click(function () {
-
-    openClose(mobileNav, undefined, logoClose, "animate__fadeOutUp", closeSvg, "animate__rotateOut", undefined, mobileItemContainer, "animate__fadeOutLeft", mobileSocialMedia, "animate__fadeOutDown", mobileContactUs, "animate__fadeOutRight")(); 
-    
-    setTimeout(() => {
-      $(mobileNav).css("top", "-100vh");
-    }, 500);
-  
-  });
+  /* --------------------- hamburger and close end --------------------- */
 
   
 });
