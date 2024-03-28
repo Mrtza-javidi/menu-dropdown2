@@ -196,7 +196,7 @@ $(document).ready(function() {
 
     $(mobileNav).find("*").removeClass("animate__fadeInDown animate__rotateIn animate__fadeInLeft animate__fadeInUp animate__fadeInRight animate__fadeOutUp animate__rotateOut animate__fadeOutLeft animate__fadeOutDown animate__fadeOutRight");
 
-    $(mobileNav).css("display", "flex");
+    $(mobileNav).css("opacity", "1");
 
     setTimeout(() => {
 
@@ -221,7 +221,7 @@ $(document).ready(function() {
     }, 300);
     
     setTimeout(() => {
-      $(mobileNav).css("display", "none");
+      $(mobileNav).css("opacity", "0");
     }, 1000);
   
   });
