@@ -86,17 +86,6 @@ a{text-decoration: none; color: #f9f9f9;}
 
 .close:hover svg {rotate: 180deg !important;}
 
-.search-bar{
-    position: absolute;
-    background-color: #F9F6EF;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 45vh;
-    font-size: 1rem;
-    z-index: 1000;
-}
-
 .white-space{
     position: fixed;
     display: none;
@@ -124,6 +113,16 @@ a{text-decoration: none; color: #f9f9f9;}
 
     nav#wide-screen > .left-column > .shopping-bag{display: block !important;} 
 
+    nav#wide-screen .search-bar {min-height: 45vh !important;}
+
+    nav#wide-screen .search-bar form{
+        min-width: 864px !important; 
+        width: 70%; 
+        margin: auto !important;
+    }
+
+    nav#wide-screen .search-bar form input{font-size: 1.5em !important;}
+
     nav#wide-screen > .right-column > .shopping-bag{display: none;} 
 
     nav#wide-screen > .left-column .hamburger-menu{display: block !important;}
@@ -131,6 +130,14 @@ a{text-decoration: none; color: #f9f9f9;}
 }
 
 @media screen and (max-width: 1022px) {
+
+    nav#wide-screen .search-bar {min-height: 40vh !important; padding: 25px 40px 10px !important;}
+
+    nav#wide-screen .search-bar form{min-width: 90% !important; margin: auto !important;}
+    nav#wide-screen .search-bar svg {
+        width: 30px !important;
+        height: 30px !important;
+    }
 
     nav#mobile-screen > .left-column {width: 60% !important; padding: 93px 1.5rem 0 !important;}
 
@@ -207,6 +214,14 @@ a{text-decoration: none; color: #f9f9f9;}
     nav#wide-screen {padding: 16px 16px !important;}
 
     nav#wide-screen .center-column .logo img{width: 100%;}
+    
+    nav#wide-screen .search-bar {min-height: 25vh !important; padding: 10px 10px !important;}
+
+    nav#wide-screen .search-bar .logo-close {padding: 0 !important;}
+
+    nav#wide-screen .search-bar form{margin: 0 !important; width: 100% !important;}
+
+    nav#wide-screen .search-bar form input{font-size: 1.25em !important;}
 
     nav#mobile-screen > .left-column {padding-top: 65px !important;}
 
@@ -425,10 +440,17 @@ nav#wide-screen > .right-column .hamburger-menu{display: none;}
 
 nav#wide-screen .search-bar{
     position: fixed;
-    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 50vh;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 48px 80px;
+    background-color: #F9F6EF;
+    font-size: 1rem;
+    z-index: 1000;
 }
 
 nav#wide-screen .search-bar svg{
@@ -444,6 +466,7 @@ nav#wide-screen .search-bar form{
     align-items: center;
     position: relative;
     width: 70%;
+    min-width: 1169px;
     margin: auto;
 }
 
@@ -461,7 +484,7 @@ nav#wide-screen .search-bar input{
     width: 100%;
     height: 96px;
     background-color: transparent;
-    font-size: 2.36em;
+    font-size: 2em;
     font-weight: 100;
     padding-right: 50px;
     color: #2222229e;
@@ -480,7 +503,8 @@ nav#wide-screen .search-bar button{
 
 nav#mobile-screen {
     position: absolute;
-    display: none;
+    display: flex;
+    opacity: 0;
     width: 100%;
     height: 100vh;
     top: -100vh;
