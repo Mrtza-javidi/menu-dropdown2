@@ -210,7 +210,7 @@ $(document).ready(function() {
   
   /* >>>>>>>>>>>> hamburger close click <<<<<<<<<<<< */
 
-  closeIcon.click(function () {
+  mobileNav.find(closeIcon).click(function () {
 
     logoCloseToggle(mobileNav, logoClose, "animate__fadeOutUp", closeSvg, "animate__rotateOut", ".1s")();
 
@@ -252,6 +252,61 @@ $(document).ready(function() {
 
   /* --------------------- open and close function for logo close end --------------------- */
 
+  /* --------------------- search bar start --------------------- */
+
+  /* >>>>>>>>>>>> global variables <<<<<<<<<<<< */
+
+  const wideNav = $('nav#wide-screen');
+  const wideSearchIcon = $("nav#wide-screen .search-icon");
+  const searchBar = $("nav#wide-screen .search-bar");
+  const searchBarForm = $("nav#wide-screen .search-bar form");
+
+  /* >>>>>>>>>>>> search bar open click <<<<<<<<<<<< */
+
+  wideSearchIcon.click(function () {
+
+    $(searchBar).find("*").removeClass("animate__fadeInDown animate__rotateIn animate__fadeIn animate__fadeOutUp animate__rotateOut animate__fadeOut");
+
+    $(searchBar).css("opacity", "1");
+
+    setTimeout(() => {
+
+      logoCloseToggle(searchBar, logoClose, "animate__fadeInDown", closeSvg, "animate__rotateIn", ".3s")();
+    
+      wideSearchBarToggle(searchBar, "0", searchBarForm, "animate__fadeIn")();
+
+    }, 1);
+  
+  });
+
+  /* >>>>>>>>>>>> search bar close click <<<<<<<<<<<< */
+
+  wideNav.find(closeIcon).click(function () {
+
+    logoCloseToggle(searchBar, logoClose, "animate__fadeOutUp", closeSvg, "animate__rotateOut", ".1s")();
+
+    wideSearchBarToggle(searchBar, undefined, searchBarForm, "animate__fadeOut")(); 
+    
+    setTimeout(() => {
+      $(searchBar).css("top", "-50vh");
+    }, 300);
+    
+    setTimeout(() => {
+      $(searchBar).css("opacity", "0");
+    }, 1200);
+  
+  });
+
+  /* >>>>>>>>>>>> open and close function for search Bar <<<<<<<<<<<< */
+
+  function wideSearchBarToggle(element, topValue, searchBarForm, animataionName) {
+    return function() {
+      $(element).css("top", topValue);
+      $(element).find(searchBarForm).addClass(animataionName);
+    };
+  }
+
+  /* --------------------- search bar end --------------------- */
 
   
 });
