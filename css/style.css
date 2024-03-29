@@ -147,7 +147,7 @@ a{text-decoration: none; color: #f9f9f9;}
 
     nav#mobile-screen > .right-column {width: 40% !important;}
 
-    .logo-close {padding: 1.5rem 2rem 0 !important;}
+    .logo-close:not(.search-bar .logo-close) {padding: 1.5rem 2rem 0 !important;}
 
 }
 
@@ -440,7 +440,7 @@ nav#wide-screen > .right-column .hamburger-menu{display: none;}
 
 nav#wide-screen .search-bar{
     position: fixed;
-    top: 0;
+    top: -50vh;
     left: 0;
     width: 100%;
     min-height: 50vh;
@@ -451,6 +451,8 @@ nav#wide-screen .search-bar{
     background-color: #F9F6EF;
     font-size: 1rem;
     z-index: 1000;
+    opacity: 0;
+    transition: top .8s ease;
 }
 
 nav#wide-screen .search-bar svg{
