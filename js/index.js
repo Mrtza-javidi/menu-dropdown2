@@ -24,7 +24,8 @@ $(document).ready(function() {
     $(wideSubMenuSubLink).off('mouseenter', wideNavSubLinkMouseEnter).off('mouseleave', wideNavSubLinkMouseLeave);
   }
 
-  function checkWindowSize() {
+
+  function checkWindowWidthForNavDisplay() {
     var windowWidth = $(window).width();
 
     if (windowWidth >= 1330) {
@@ -32,12 +33,13 @@ $(document).ready(function() {
     } else {
       navDisappears();
     }
+    
   }
 
   // check the current window width 
-  $(window).resize(checkWindowSize);
+  $(window).resize(checkWindowWidthForNavDisplay);
   // check the first load window width 
-  checkWindowSize();
+  checkWindowWidthForNavDisplay();
 
 
   /* >>>>>>>>>>>> define mouse events  <<<<<<<<<<<< */
@@ -281,21 +283,59 @@ $(document).ready(function() {
 
   /* >>>>>>>>>>>> search bar close click <<<<<<<<<<<< */
 
-  wideNav.find(closeIcon).click(function () {
+  function searchBarCloseCaller(topValue) {
+    $(wideNav).find(closeIcon).click(function() {
+      searchBarClose(topValue);
+    });
+  }
+
+  function checkWindowWidthForSearchBarClose() {
+    var windowWidth = $(window).width();
+
+    if (windowWidth >= 1330) {
+
+      searchBarClose("-500px");
+      searchBarCloseCaller("-500px");
+
+    } else if (windowWidth > 1022 && windowWidth <= 1329){
+
+      searchBarClose("-400px");
+      searchBarCloseCaller("-400px");
+      
+    } else if (windowWidth > 480 && windowWidth <= 1022){
+
+      searchBarClose("-300px");
+      searchBarCloseCaller("-300px");
+
+    } else if (windowWidth <= 480){
+
+      searchBarClose("-200px");
+      searchBarCloseCaller("-200px");
+    
+    }
+  }
+
+  // check the current window width 
+  $(window).resize(checkWindowWidthForSearchBarClose);
+  // check the first load window width 
+  checkWindowWidthForSearchBarClose();
+
+
+  function searchBarClose(topValue) {
 
     logoCloseToggle(searchBar, logoClose, "animate__fadeOutUp", closeSvg, "animate__rotateOut", ".1s")();
 
     wideSearchBarToggle(searchBar, undefined, searchBarForm, "animate__fadeOut")(); 
-    
+
     setTimeout(() => {
-      $(searchBar).css("top", "-50vh");
-    }, 300);
-    
+      $(searchBar).css("top", topValue);
+    }, 300);  
+
     setTimeout(() => {
       $(searchBar).css("opacity", "0");
-    }, 1200);
+    }, 1100);
   
-  });
+  };
 
   /* >>>>>>>>>>>> open and close function for search Bar <<<<<<<<<<<< */
 
