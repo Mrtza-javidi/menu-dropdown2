@@ -113,7 +113,7 @@ a{text-decoration: none; color: #f9f9f9;}
 
     nav#wide-screen > .left-column > .shopping-bag{display: block !important;} 
 
-    nav#wide-screen .search-bar {min-height: 45vh !important;}
+    nav#wide-screen .search-bar {min-height: 400px !important;}
 
     nav#wide-screen .search-bar form{
         min-width: 864px !important; 
@@ -131,7 +131,7 @@ a{text-decoration: none; color: #f9f9f9;}
 
 @media screen and (max-width: 1022px) {
 
-    nav#wide-screen .search-bar {min-height: 40vh !important; padding: 25px 40px 10px !important;}
+    nav#wide-screen .search-bar {min-height: 300px !important; padding: 25px 40px 10px !important;}
 
     nav#wide-screen .search-bar form{min-width: 90% !important; margin: auto !important;}
     nav#wide-screen .search-bar svg {
@@ -215,7 +215,10 @@ a{text-decoration: none; color: #f9f9f9;}
 
     nav#wide-screen .center-column .logo img{width: 100%;}
     
-    nav#wide-screen .search-bar {min-height: 25vh !important; padding: 10px 10px !important;}
+    nav#wide-screen .search-bar {
+        min-height: 200px !important; 
+        padding: 10px 10px !important;
+    }
 
     nav#wide-screen .search-bar .logo-close {padding: 0 !important;}
 
@@ -440,10 +443,10 @@ nav#wide-screen > .right-column .hamburger-menu{display: none;}
 
 nav#wide-screen .search-bar{
     position: fixed;
-    top: -50vh;
+    top: -500px;
     left: 0;
     width: 100%;
-    min-height: 50vh;
+    min-height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
