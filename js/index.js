@@ -262,6 +262,7 @@ $(document).ready(function() {
   const wideSearchIcon = $("nav#wide-screen .search-icon");
   const searchBar = $("nav#wide-screen .search-bar");
   const searchBarForm = $("nav#wide-screen .search-bar form");
+  const navWhiteSpace = $("nav#wide-screen .white-space");
 
   /* >>>>>>>>>>>> search bar open click <<<<<<<<<<<< */
 
@@ -278,13 +279,16 @@ $(document).ready(function() {
       wideSearchBarToggle(searchBar, "0", searchBarForm, "animate__fadeIn")();
 
     }, 1);
+
+    navWhiteSpace.css("background-color", "#f9f9f924");
+    navWhiteSpace.fadeIn();
   
   });
 
   /* >>>>>>>>>>>> search bar close click <<<<<<<<<<<< */
 
   function searchBarCloseCaller(topValue) {
-    $(wideNav).find(closeIcon).click(function() {
+    $(searchBar).find(closeIcon).click(function() {
       searchBarClose(topValue);
     });
   }
@@ -335,6 +339,8 @@ $(document).ready(function() {
       $(searchBar).css("opacity", "0");
     }, 1100);
   
+    navWhiteSpace.fadeOut(1200);
+
   };
 
   /* >>>>>>>>>>>> open and close function for search Bar <<<<<<<<<<<< */
@@ -347,6 +353,66 @@ $(document).ready(function() {
   }
 
   /* --------------------- search bar end --------------------- */
+
+  /* --------------------- contact us end --------------------- */
+
+  const contactUs = $("nav#wide-screen > .contact-us");
+  const contactUsIcon = $("nav#wide-screen > .right-column .contact-us-icon");
+
+  /* >>>>>>>>>>>> contact us icon click <<<<<<<<<<<< */
+  
+  contactUsIcon.click(function () {
+    
+    $(contactUs).css("opacity", "1");
+
+    setTimeout(() => {
+    
+      wideContactUsToggle(contactUs, "0")();
+
+    }, 1);
+
+    navWhiteSpace.css("background-color", "");
+    navWhiteSpace.fadeIn();
+
+  })
+
+  /* >>>>>>>>>>>> contact us close icon click <<<<<<<<<<<< */
+
+  contactUs.find(closeIcon).click(function () {
+    
+    $(contactUs).css("right", "-390px");
+    
+    setTimeout(() => {
+      $(contactUs).css("opacity", "0");
+    }, 800);
+
+    navWhiteSpace.fadeOut(1000);
+  
+  });
+
+  /* >>>>>>>>>>>> open and close function for contact us <<<<<<<<<<<< */
+
+  function wideContactUsToggle(element, rightValue) {
+    return function() {
+      $(element).css("right", rightValue);
+    };
+  }
+
+  /* --------------------- contact us end --------------------- */
+
+  /* --------------------- white space start --------------------- */
+
+    navWhiteSpace.click(function () {
+
+      searchBarClose();
+      checkWindowWidthForSearchBarClose();
+      navWhiteSpace.fadeOut(1200);
+      $(contactUs).css("right", "-390px");
+
+    });
+
+  /* --------------------- white space end --------------------- */
+
 
   
 });
