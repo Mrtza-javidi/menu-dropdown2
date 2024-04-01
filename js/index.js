@@ -263,6 +263,7 @@ $(document).ready(function() {
   const searchBar = $("nav#wide-screen .search-bar");
   const searchBarForm = $("nav#wide-screen .search-bar form");
   const navWhiteSpace = $("nav#wide-screen .white-space");
+  const navSearchBarWhiteSpace = $("nav#wide-screen .search-bar-white-space");
 
   /* >>>>>>>>>>>> search bar open click <<<<<<<<<<<< */
 
@@ -280,8 +281,8 @@ $(document).ready(function() {
 
     }, 1);
 
-    navWhiteSpace.css("background-color", "#f9f9f924");
-    navWhiteSpace.fadeIn();
+    navSearchBarWhiteSpace.css("background-color", "#f9f9f924");
+    navSearchBarWhiteSpace.fadeIn();
   
   });
 
@@ -301,12 +302,12 @@ $(document).ready(function() {
       searchBarClose("-500px");
       searchBarCloseCaller("-500px");
 
-    } else if (windowWidth > 1022 && windowWidth <= 1329){
+    } else if (windowWidth <= 1329 && windowWidth >= 1022) {
 
       searchBarClose("-400px");
       searchBarCloseCaller("-400px");
-      
-    } else if (windowWidth > 480 && windowWidth <= 1022){
+    
+    } else if (windowWidth <= 1021 && windowWidth >= 481){
 
       searchBarClose("-300px");
       searchBarCloseCaller("-300px");
@@ -339,7 +340,7 @@ $(document).ready(function() {
       $(searchBar).css("opacity", "0");
     }, 1100);
   
-    navWhiteSpace.fadeOut(1200);
+    navSearchBarWhiteSpace.fadeOut(1200);
 
   };
 
@@ -352,9 +353,21 @@ $(document).ready(function() {
     };
   }
 
+  /* >>>>>>>>>>>> search bar white space start <<<<<<<<<<<< */
+
+  navSearchBarWhiteSpace.click(function () {
+    navSearchBarWhiteSpace.fadeOut(800);
+    searchBarClose();
+    checkWindowWidthForSearchBarClose();
+  })
+
+  /* >>>>>>>>>>>> search bar white space end <<<<<<<<<<<< */
+
   /* --------------------- search bar end --------------------- */
 
-  /* --------------------- contact us end --------------------- */
+  /* --------------------- contact us start --------------------- */
+
+  /* >>>>>>>>>>>> global variables <<<<<<<<<<<< */
 
   const contactUs = $("nav#wide-screen > .contact-us");
   const contactUsIcon = $("nav#wide-screen > .right-column .contact-us-icon");
@@ -400,14 +413,42 @@ $(document).ready(function() {
 
   /* --------------------- contact us end --------------------- */
 
+  /* --------------------- shopping bag start --------------------- */
+
+  const shoppingBag = $("nav#wide-screen .shopping-bag");
+  const shoppingBagIcon = $("nav#wide-screen .shopping-bag-icon");
+
+  /* >>>>>>>>>>>> shopping bag icon click <<<<<<<<<<<< */
+  
+  shoppingBagIcon.click(function () {
+        
+    $(shoppingBag).fadeIn();
+    $(shoppingBag).css("display", "flex");
+
+    navWhiteSpace.css("background-color", "");
+    navWhiteSpace.fadeIn();
+
+  })
+
+  /* >>>>>>>>>>>> shopping bag close icon click <<<<<<<<<<<< */
+
+  shoppingBag.find(closeIcon).click(function () {
+    
+    $(shoppingBag).fadeOut();
+
+    navWhiteSpace.fadeOut();
+  
+  });
+
+  /* --------------------- shopping bag end --------------------- */
+
   /* --------------------- white space start --------------------- */
 
     navWhiteSpace.click(function () {
 
-      searchBarClose();
-      checkWindowWidthForSearchBarClose();
-      navWhiteSpace.fadeOut(1200);
+      navWhiteSpace.fadeOut();
       $(contactUs).css("right", "-390px");
+      $(shoppingBag).fadeOut();
 
     });
 
